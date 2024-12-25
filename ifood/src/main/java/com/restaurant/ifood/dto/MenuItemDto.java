@@ -17,5 +17,6 @@ public class MenuItemDto {
     private Float prix;
     private String categorie;
     private Boolean disponible;
+    private String image;
     private List<PanierMenuItemDto> panierMenuItemDtos;
 }

@@ -14,6 +14,7 @@ public class LivreurDto {
     private String nom;
     private String email;
     private String motdepasse;
+    private String numTelephone;
     private List<Long> livraisonIds;
     private String statut;
 }

@@ -19,6 +19,7 @@ public class Livreur {
     private String nom;
     private String email;
     private String motdepasse;
+    private String numTelephone;
 
     @Enumerated(EnumType.STRING)
     private Statut statut;

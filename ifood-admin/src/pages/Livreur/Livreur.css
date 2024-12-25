@@ -1,7 +1,5 @@
-
-
 /* Titre */
-.clients-container h1 {
+.livreurs-container h1 {
     font-size: 2.5rem;
     color: #2c3e50;
     text-align: center;
@@ -9,8 +7,7 @@
     font-weight: bold;
 }
 
-/* Table */
-.clients-table {
+.livreurs-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 30px;
@@ -19,18 +16,16 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Entête de la table */
-.clients-table th {
+.livreurs-table th {
     padding: 15px;
-    background-color: #750202;
+    background-color: #a41606;
     color: white;
     font-size: 1.2rem;
-    text-align: left;
+    text-align: center;
     letter-spacing: 0.5px;
 }
 
-/* Lignes de la table */
-.clients-table td {
+.livreurs-table td {
     padding: 15px;
     background-color: #ffffff;
     text-align: left;
@@ -39,32 +34,27 @@
     color: #34495e;
 }
 
-/* Ligne survolée */
-.clients-table tr:hover {
+.livreurs-table tr:hover {
     background-color: #f2f6fa;
     cursor: pointer;
     transform: translateY(-2px);
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-/* Espacement entre les colonnes */
-.clients-table td, .clients-table th {
+.livreurs-table td, .livreurs-table th {
     padding-left: 25px;
     padding-right: 25px;
 }
 
-/* Ajouter une bordure plus nette pour les lignes du bas */
-.clients-table td:last-child {
+.livreurs-table td:last-child {
     border-right: 1px solid #f2f2f2;
 }
 
-/* Ajouter des coins arrondis au tableau */
-.clients-table {
+.livreurs-table {
     border-radius: 8px;
     overflow: hidden;
 }
 
-/* Style des erreurs */
 .error-message {
     color: red;
     text-align: center;
@@ -72,10 +62,10 @@
     margin-top: 20px;
 }
 
-/* Style des boutons (si vous avez un bouton pour ajouter un client, par exemple) */
+
 .button {
     padding: 12px 25px;
-    background-color: #2ecc71;
+    background-color: #000000;
     color: white;
     font-size: 1.1rem;
     border: none;
@@ -87,8 +77,37 @@
     width: 200px;
 }
 
-/* Effet au survol du bouton */
-.button:hover {
-    background-color: #27ae60;
-    transform: scale(1.05);
+.livreur-actions {
+    display: flex;
+    gap: 10px; 
+    justify-content: flex-start; 
+}
+
+.update-button, .delete-button {
+    width: 90%;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.update-button {
+    background-color: #000000;
+    color: white;
+}
+
+.update-button:hover {
+    background-color: #000000;
+    transform: scale(1.05);
+}
+
+.delete-button {
+    background-color: #a41606;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #a41606;
+    transform: scale(1.05);
 }

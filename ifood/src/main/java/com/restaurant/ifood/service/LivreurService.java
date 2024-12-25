@@ -57,6 +57,7 @@ public class LivreurService implements ILivreurService {
 
         existingLivreur.setNom(livreurDto.getNom());
         existingLivreur.setEmail(livreurDto.getEmail());
+        existingLivreur.setNumTelephone(livreurDto.getNumTelephone());
         existingLivreur.setStatut(Livreur.Statut.valueOf(livreurDto.getStatut()));
         if (livreurDto.getMotdepasse() != null) {
             existingLivreur.setMotdepasse(BCrypt.hashpw(livreurDto.getMotdepasse(), BCrypt.gensalt()));

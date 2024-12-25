@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({onLogin}) => {
   const [email, setEmail] = useState("");
   const [motdepasse, setMotdepasse] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -17,6 +17,7 @@ const Login = () => {
         motdepasse,
       });
       if (response.status === 200) {
+        onLogin();
         navigate("/dashboard");
       }
     } catch (error) {

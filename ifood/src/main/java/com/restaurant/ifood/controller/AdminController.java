@@ -19,6 +19,7 @@ public class AdminController {
     @PostMapping("/login")
     public ResponseEntity<AdminDto> login(@RequestBody AdminDto adminDto) {
         AdminDto loggedInAdmin = adminService.login(adminDto);
+        System.out.println("admin est "+ adminDto.getEmail());
         if (loggedInAdmin != null) {
             return ResponseEntity.ok(loggedInAdmin);
         }

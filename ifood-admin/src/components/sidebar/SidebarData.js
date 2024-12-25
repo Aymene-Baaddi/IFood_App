@@ -2,6 +2,8 @@ import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
+import { FaTruck } from 'react-icons/fa';
+
 
 export const SidebarData = [
   {
@@ -28,5 +30,23 @@ export const SidebarData = [
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
+  {
+    title: 'Livreurs',
+    path: '/livreurs',
+    icon: <FaTruck /> ,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Ajouter admin',
+    path: '/addadmin',
+    icon: <IoIcons.IoIosAddCircle />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Deconnexion',
+    path: '/',
+    icon: <IoIcons.IoMdLogOut/>,
+    cName: 'nav-text'
+  }
 
 ];

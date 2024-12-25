@@ -23,6 +23,7 @@ public class MenuItem {
         private Float prix;
         private String categorie;
         private Boolean disponible;
+        private String image;
         @OneToMany(mappedBy = "menuItem")
         @JsonIgnore
         private List<PanierMenuItem> panierMenuItems = new ArrayList<>();
