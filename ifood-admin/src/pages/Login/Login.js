@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
-const Login = ({onLogin}) => {
+const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [motdepasse, setMotdepasse] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [, setLoggedInUser] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -16,9 +17,16 @@ const Login = ({onLogin}) => {
         email,
         motdepasse,
       });
-      if (response.status === 200) {
-        onLogin();
+      if (response.data) {
+        const adminid = response.data.id; 
+        setLoggedInUser(response.data);
+        setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userId", adminid);
+        alert('Connexion réussie ! Utilisateur connecté :', response.data);
         navigate("/dashboard");
+      } else {
+        alert('La connexion a échoué. Veuillez vérifier vos informations d\'identification.');
       }
     } catch (error) {
       setErrorMessage("Email ou mot de passe incorrect");
@@ -27,8 +35,8 @@ const Login = ({onLogin}) => {
 
   return (
     <div className="login-container">
-      <h1>Connexion Admin</h1>
       <form className="login-form" onSubmit={handleLogin}>
+        <h1>Connexion Admin</h1>
         <div>
           <label>Email :</label>
           <input
@@ -54,4 +62,4 @@ const Login = ({onLogin}) => {
   );
 };
 
-export default Login;
+export default Login;

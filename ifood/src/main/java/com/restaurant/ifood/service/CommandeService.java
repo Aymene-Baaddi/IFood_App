@@ -29,27 +29,38 @@ public class CommandeService implements ICommandeService {
 
     @Override
     public CommandeDto addCommande(CommandeDto commandeDto) {
+
         Panier panier = panierRepository.findById(commandeDto.getPanier_id())
                 .orElseThrow(() -> new RuntimeException("Panier non trouvé avec l'ID : " + commandeDto.getPanier_id()));
 
         Commande commande = modelMapper.map(commandeDto, Commande.class);
-
         commande.setPanier(panier);
+
+        double total = panier.getPanierMenuItems()
+                .stream()
+                .mapToDouble(item -> item.getMenuItem().getPrix() * item.getQuantite())
+                .sum();
+
+        commande.setTotal(total);
 
         commande = commandeRepository.save(commande);
 
         CommandeDto savedCommandeDto = modelMapper.map(commande, CommandeDto.class);
         PanierDto panierDto = modelMapper.map(panier, PanierDto.class);
+
         panierDto.setPanierMenuItemDtos(panier.getPanierMenuItems()
                 .stream()
                 .map(panierMenuItem -> new PanierMenuItemDto(
                         modelMapper.map(panierMenuItem.getMenuItem(), MenuItemDto.class),
                         panierMenuItem.getQuantite()))
                 .toList());
+
         savedCommandeDto.setPanier(panierDto);
+        savedCommandeDto.setTotal(total);
 
         return savedCommandeDto;
     }
+
 
 
     @Override

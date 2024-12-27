@@ -7,6 +7,7 @@
     text-align: center;
     margin-bottom: 40px;
     font-weight: bold;
+    margin-top: 7%;
 }
 
 /* Table */
@@ -22,7 +23,7 @@
 /* Entête de la table */
 .clients-table th {
     padding: 15px;
-    background-color: #750202;
+    background-color: #7e0303;
     color: white;
     font-size: 1.2rem;
     text-align: left;

@@ -16,6 +16,7 @@ public class CommandeDto {
     private Date date;
     private String statut;
     private String adresse_livraison;
+    private Double total;
     private Long livraison_id;
     private Long panier_id;
     private PanierDto panier;

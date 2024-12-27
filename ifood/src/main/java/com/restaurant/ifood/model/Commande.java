@@ -25,6 +25,8 @@ public class Commande {
 
     private String adresse_livraison;
 
+    private Double total;
+
     @OneToOne
     @JoinColumn(name = "panier_id")
     private Panier panier;

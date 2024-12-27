@@ -1,0 +1,272 @@
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .menu-container h1{
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+  
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  
+  .add-button:hover {
+    background-color: #218838;
+  }
+  
+  .category-section {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+.menu-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-button {
+  background-color: #01415f;
+  color: white;
+  border: none;
+  padding: 17px 40px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+ 
+
+}
+
+.add-button:hover {
+  background-color: #005ac8;
+}
+
+
+.category-title {
+    font-size: 2.3rem; /* Taille du texte plus grande */
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center; 
+    color: #333; /* Couleur de texte moderne */
+    text-transform: uppercase; /* Mettre le texte en majuscules */
+    letter-spacing: 1px; /* Espacement des lettres */
+    position: relative; /* Position pour ajouter un effet */
+  }
+  
+  .category-title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px; 
+    left: 0;
+    width: 100vh; 
+    height: 4px; 
+    background-color: #7e0303; 
+  }
+  
+
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 15px; /* Espacement réduit entre les cartes */
+    justify-content: start; /* Aligne les cartes à gauche */
+    margin: 0; /* Retirer tout espacement inutile autour de la grille */
+  }
+  
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 400px; /* Hauteur minimale */
+  height: 100%; 
+  border: 1px solid #949494;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.menu-card:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.menu-image-container {
+  position: relative;
+  padding-top: 56.25%; /* Aspect ratio 16:9 */
+  margin: 10px;
+}
+
+.menu-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  margin: 10px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.menu-image:hover {
+  transform: scale(1.05);
+}
+
+.menu-details {
+  padding: 15px;
+  flex-grow: 1; 
+}
+
+
+.menu-name {
+    font-size: 1.4rem; 
+    font-weight: 600; 
+    margin-bottom: 8px;
+    color: #2c3e50; 
+    letter-spacing: 0.5px; 
+    text-transform: capitalize; 
+    line-height: 1.4; 
+  }
+  
+  .menu-description {
+    font-size: 1rem; 
+    color: #7f8c8d; 
+    margin-bottom: 20px; 
+    line-height: 1.6; 
+    font-style: italic; 
+  }
+  
+  .menu-price {
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    color: #000451; 
+    margin-bottom: 15px;
+    text-align: center;
+    text-transform: uppercase; /* Mettre le prix en majuscules */
+    letter-spacing: 1px;
+  }
+  
+.menu-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.menu-button {
+  width: 45%;
+  font-size: 1.1rem;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu-button.edit {
+  background-color: #01415f;
+  color: white;
+}
+
+.menu-button.edit:hover {
+  background-color: #0056b3;
+}
+
+.menu-button.delete {
+  background-color: #7e0303;
+  color: white;
+}
+
+.menu-button.delete:hover {
+  background-color: #a80202;
+}
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 300px minimum width for each card */
+    gap: 20px;
+    justify-content: start; /* Align the cards to the left */
+  }
+
+  .menu-card {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px; /* Hauteur minimale */
+    height: 100%; /* Utilise toute la hauteur de son parent mais avec un comportement responsive */
+    border: 1px solid #949494;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+    flex-grow: 1; /* Garantit que les cartes remplissent uniformément l'espace */
+  }
+  
+  .menu-card:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .menu-image-container {
+    position: relative;
+    padding-top: 56.25%; /* Aspect ratio 16:9 */
+    margin: 10px;
+  }
+  
+  .menu-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    margin: 10px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+  }
+  
+  .menu-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .menu-details {
+    padding: 15px;
+    flex-grow: 1; /* Permet à la section détails de s'étendre lorsque nécessaire */
+  }
+  
+ 
+  
+  .menu-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+  }
+  
+  .menu-button {
+    width: 45%;
+    font-size: 1.1rem;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  

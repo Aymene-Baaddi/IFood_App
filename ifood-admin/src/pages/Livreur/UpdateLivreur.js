@@ -21,6 +21,7 @@ const UpdateLivreur = () => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/livreur/${id}`);
                 setLivreurData(response.data); 
+                
             } catch (error) {
                 console.error('Error fetching livreur data:', error);
             }

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn, MDBCardTitle, MDBCardText } from 'mdb-react-ui-kit';
 import { useNavigate } from "react-router-dom";
-
+import "./MenuItems.css";
 
 const MenuItems = () => {
-
   const [menuItems, setMenuItems] = useState([]);
- 
-
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
   const handleAddMenuItem = () => {
@@ -16,14 +13,28 @@ const MenuItems = () => {
   };
 
   const handleUpdateMenuItem = (id) => {
-    navigate(`/updatemenuitem/${id}`);  
+    navigate(`/updatemenuitem/${id}`);
   };
 
-  // Fetch menu items from the API
+  const handleDeleteMenuItem = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/menuitem/${id}`);
+      setMenuItems(menuItems.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Error deleting menu item", error);
+    }
+  };
+
   const fetchMenuItems = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/menuitem");
-      setMenuItems(response.data);
+      const items = response.data;
+
+      // Extraire les catégories uniques des items
+      const uniqueCategories = [...new Set(items.map(item => item.categorie))];
+
+      setCategories(uniqueCategories);
+      setMenuItems(items);
     } catch (error) {
       console.error("Error fetching menu items", error);
     }
@@ -33,53 +44,61 @@ const MenuItems = () => {
     fetchMenuItems();
   }, []);
 
-
-  const handleDeleteMenuItem = async (id) => {
-    try {
-      await axios.delete(`http://localhost:8080/api/menu-items/${id}`);
-      setMenuItems(menuItems.filter(item => item.id !== id));
-    } catch (error) {
-      console.error("Error deleting menu item", error);
-    }
+  const filterByCategory = (category) => {
+    return menuItems.filter(item => item.categorie === category);
   };
 
-  
-
   return (
-    <MDBContainer className="mt-5">
-      {/* Button to add a new menu item */}
-      <div className="text-center mb-4">
-        <MDBBtn onClick={() => handleAddMenuItem()} style={{ backgroundColor: 'black' }}>
-          Ajouter un élément de menu
-        </MDBBtn>
+    <div className="menu-container">
+      <h1>Liste des MenuItems</h1>
+      <div className="menu-header">
+      
+        <button className="add-button" onClick={handleAddMenuItem}>
+          Add New MenuItem
+        </button>
       </div>
-
-      <MDBRow>
-        {menuItems.map((item) => (
-          <MDBCol md="4" key={item.id} className="mb-4">
-            <MDBCard>
-              <MDBCardBody>
-                <MDBCardTitle>{item.nom}</MDBCardTitle>
-                <MDBCardText>
-                  <strong>Catégorie:</strong> {item.categorie} <br />
-                  <strong>Prix:</strong> {item.prix} <br />
-                  <strong>Description:</strong> {item.description} <br />
-                  <strong>Disponible:</strong> {item.disponible ? "Oui" : "Non"}
-                </MDBCardText>
-                {/* Image of the menu item (you can add an image URL here) */}
-                <img src={item.image} alt={item.nom} className="img-fluid mb-3" />
-
-                {/* Buttons for update and delete */}
-                <div className="d-flex justify-content-between">
-                  <MDBBtn size="sm" onClick={() => handleUpdateMenuItem(item.id, { ...item, nom: 'Updated Name' })}>Mettre à jour</MDBBtn>
-                  <MDBBtn size="sm" color="danger" onClick={() => handleDeleteMenuItem(item.id)}>Supprimer</MDBBtn>
+      {categories.map((category) => (
+        <div key={category} className="category-section">
+          <h2 className="category-title">{category}</h2>
+          <div className="menu-grid">
+            {filterByCategory(category).length > 0 ? (
+              filterByCategory(category).map((item) => (
+                <div className="menu-card" key={item.id}>
+                  <div className="menu-image-container">
+                    <img
+                      src={item.image}
+                      alt={item.nom}
+                      className="menu-image"
+                    />
+                  </div>
+                  <div className="menu-details">
+                    <h2 className="menu-name">{item.nom}</h2> 
+                    <p className="menu-description">{item.description}</p>
+                    <p className="menu-price">{item.prix} dh</p> 
+                    <div className="menu-actions">
+                      <button
+                        className="menu-button edit"
+                        onClick={() => handleUpdateMenuItem(item.id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="menu-button delete"
+                        onClick={() => handleDeleteMenuItem(item.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        ))}
-      </MDBRow>
-    </MDBContainer>
+              ))
+            ) : (
+              <p>No items in this category</p>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
