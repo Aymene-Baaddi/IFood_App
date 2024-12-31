@@ -34,9 +34,19 @@ public class LivraisonController {
         return ResponseEntity.ok(livraisons);
     }
 
+    @PostMapping("/createFromCommande/{commandeId}")
+    public LivraisonDto createLivraisonFromCommande(@PathVariable Long commandeId) {
+        return livraisonService.createLivraisonFromCommande(commandeId);
+    }
+
+    @GetMapping("/commande/{commandeId}/hasLivraison")
+    public boolean hasLivraison(@PathVariable Long commandeId) {
+        return livraisonService.hasLivraison(commandeId);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteLivraison(@PathVariable Long id) {
         livraisonService.deleteLivraison(id);
         return ResponseEntity.noContent().build();
-}
+    }
 }

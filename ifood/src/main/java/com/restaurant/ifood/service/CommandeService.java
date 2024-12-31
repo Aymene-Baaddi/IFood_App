@@ -119,6 +119,39 @@ public class CommandeService implements ICommandeService {
     }
 
     @Override
+    public List<CommandeDto> getAllCommandesByPanier(Long panierId) {
+        return commandeRepository.findByPanierId(panierId)
+                .stream()
+                .map(commande -> {
+
+                    CommandeDto commandeDto = modelMapper.map(commande, CommandeDto.class);
+
+                    if (commande.getPanier() != null) {
+
+                        PanierDto panierDto = new PanierDto();
+                        panierDto.setId(commande.getPanier().getId());
+
+                        List<PanierMenuItemDto> panierMenuItemDtos = commande.getPanier().getPanierMenuItems()
+                                .stream()
+                                .map(panierMenuItem -> new PanierMenuItemDto(
+                                        modelMapper.map(panierMenuItem.getMenuItem(), MenuItemDto.class), // Mapper MenuItem vers MenuItemDto
+                                        panierMenuItem.getQuantite()
+                                ))
+                                .collect(Collectors.toList());
+
+                        panierDto.setPanierMenuItemDtos(panierMenuItemDtos);
+
+                        commandeDto.setPanier(panierDto);
+                    }
+
+                    return commandeDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+
+
+    @Override
     public CommandeDto updateCommande(Long id, CommandeDto commandeDto) {
         Commande existingCommande = commandeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée avec l'ID : " + id));

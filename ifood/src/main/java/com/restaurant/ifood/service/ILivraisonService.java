@@ -10,4 +10,7 @@ public interface ILivraisonService {
     LivraisonDto getLivraisonById(Long id);
     List<LivraisonDto> getAllLivraisons();
     void deleteLivraison(Long id);
+
+    boolean hasLivraison(Long commandeId);
+    LivraisonDto createLivraisonFromCommande(Long commandeId);
 }

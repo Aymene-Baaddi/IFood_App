@@ -33,6 +33,11 @@ public class CommandeController {
         List<CommandeDto> commandes = commandeService.getAllCommandes();
         return ResponseEntity.ok(commandes);
     }
+    @GetMapping("/panier/{id}")
+    public ResponseEntity<List<CommandeDto>> getCommandesByPanier(@PathVariable Long id) {
+        List<CommandeDto> commandes = commandeService.getAllCommandesByPanier(id);
+        return ResponseEntity.ok(commandes);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<CommandeDto> updateCommande(@PathVariable Long id, @RequestBody CommandeDto commandeDto) {

@@ -72,7 +72,6 @@ public class LivraisonService implements ILivraisonService {
         return livraisonDto;
     }
 
-
     @Override
     public List<LivraisonDto> getAllLivraisons() {
         return livraisonRepository.findAll().stream()
@@ -91,15 +90,34 @@ public class LivraisonService implements ILivraisonService {
                 .collect(Collectors.toList());
     }
 
-
-
-
-
-
     @Override
     public void deleteLivraison(Long id) {
         Livraison livraison = livraisonRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livraison non trouvée"));
         livraisonRepository.delete(livraison);
+    }
+
+    public boolean hasLivraison(Long commandeId) {
+        Commande commande = commandeRepository.findById(commandeId)
+                .orElseThrow(() -> new RuntimeException("Commande non trouvée avec l'ID : " + commandeId));
+        return commande.getLivraison() != null;
+    }
+
+    public LivraisonDto createLivraisonFromCommande(Long commandeId) {
+        Commande commande = commandeRepository.findById(commandeId)
+                .orElseThrow(() -> new RuntimeException("Commande non trouvée avec l'ID : " + commandeId));
+
+        if (commande.getLivraison() != null) {
+            throw new RuntimeException("Cette commande a déjà une livraison.");
+        }
+
+        Livraison livraison = new Livraison();
+        livraison.setTempsEstime("30 minutes");
+        Livraison savedLivraison = livraisonRepository.save(livraison);
+
+        commande.setLivraison(savedLivraison);
+        commandeRepository.save(commande);
+
+        return modelMapper.map(savedLivraison, LivraisonDto.class);
 }
 }

@@ -8,7 +8,9 @@ public interface ICommandeService {
     CommandeDto addCommande(CommandeDto commandeDto);
     CommandeDto getCommandeById(Long id);
     List<CommandeDto> getAllCommandes();
+    List<CommandeDto> getAllCommandesByPanier(Long panierId);
     CommandeDto updateCommande(Long id, CommandeDto commandeDto);
+
 
     void deleteCommande(Long id);
 }
